@@ -167,16 +167,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 7. Contact Modal Logic
     const getStartedBtn = document.getElementById('getStartedBtn');
+    const bookDemoBtn = document.getElementById('bookDemoBtn');
     const contactModal = document.getElementById('contactModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
-    if (getStartedBtn && contactModal) {
-        getStartedBtn.addEventListener('click', (e) => {
+    if (contactModal) {
+        const openModal = (e) => {
             e.preventDefault();
             contactModal.classList.add('active');
             if (lenis) lenis.stop(); // Pause smooth scroll
             document.body.style.overflow = 'hidden';
-        });
+        };
+
+        if (getStartedBtn) getStartedBtn.addEventListener('click', openModal);
+        if (bookDemoBtn) bookDemoBtn.addEventListener('click', openModal);
 
         const closeModal = () => {
             contactModal.classList.remove('active');
@@ -184,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.style.overflow = '';
         };
 
-        closeModalBtn.addEventListener('click', closeModal);
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
         contactModal.addEventListener('click', (e) => {
             if (e.target === contactModal) {
                 closeModal();
